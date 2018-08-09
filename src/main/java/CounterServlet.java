@@ -38,7 +38,7 @@ public class CounterServlet extends HttpServlet {
             writer.println("<!DOCTYPE html><html>");
             writer.println("<head>");
             writer.println("<meta charset=\"UTF-8\" />");
-            writer.println("<title>CounterServlet using doGet() to increment local variable</title>");
+            writer.println(getTitle());
             writer.println("</head>");
             writer.println("<body>");
 
@@ -47,5 +47,9 @@ public class CounterServlet extends HttpServlet {
             writer.println("</body>");
             writer.println("</html>");
         }
+    }
+
+    public String getTitle() {
+        return "<title>CounterServlet using doGet() to increment local variable</title>";
     }
 }
