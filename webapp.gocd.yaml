@@ -19,7 +19,7 @@ pipelines:
                       - "assemble"
               artifacts:
                 - build:
-                    source: build/libs/*.jar
+                    source: build/libs/*.war
                     destination: Build
       - Test:
           jobs:
@@ -35,10 +35,11 @@ pipelines:
                 - build:
                     source: build/reports/tests/test/**/*
                     destination: html
-
+                
+                - build:
                     source: build/jacocoHtml/**/*
                     destination: jacoco
-                    
+
                 - test:
                     source: build/test-results/test/*.xml
                     destination: xml
