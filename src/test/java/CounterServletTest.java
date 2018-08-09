@@ -16,5 +16,4 @@ public class CounterServletTest {
         assertEquals(title, counter.getTitle());
     }
 
-
 }
