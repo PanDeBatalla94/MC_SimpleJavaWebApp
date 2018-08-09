@@ -4,20 +4,20 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-	        sh './gradle/quickstart/gradlew clean assemble -p gradle/quickstart/'
+	        sh './gradlew clean assemble'
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing..'
-	        sh './gradle/quickstart/gradlew test jacocoTestReport -p gradle/quickstart/'                
+	        sh './gradlew test jacocoTestReport'                
             }
         }
 
         stage('Code quality analysis...') {
             steps {
                 echo 'sonarqube...'
-	        sh './gradle/quickstart/gradlew sonarqube -p gradle/quickstart/'                
+	        sh './gradlew sonarqube '                
             }
         }
        
@@ -26,11 +26,11 @@ pipeline {
     }
     post {
         always {
-            junit 'gradle/quickstart/build/test-results/test/*.xml'
+            junit 'build/test-results/test/*.xml'
             publishHTML(target: [allowMissing: true, 
                          alwaysLinkToLastBuild: false,  
                          keepAll: true, 
-                         reportDir: 'gradle/quickstart/build/reports/tests/test', 
+                         reportDir: 'build/reports/tests/test', 
                          reportFiles: 'index.html', 
                          reportTitles: "Simple Report",
                          reportName: 'JUnit Test Reports'])
@@ -38,13 +38,13 @@ pipeline {
             publishHTML(target: [allowMissing: true, 
                         alwaysLinkToLastBuild: false, 
                         keepAll: true, 
-                        reportDir: 'gradle/quickstart/build/jacocoHtml', 
+                        reportDir: 'build/jacocoHtml', 
                         reportFiles: 'index.html',
                         reportTitles: "SimpleCov Report", 
                         reportName: 'JaCoCo Coverage Reports'])
         }
         success {
-            archiveArtifacts artifacts: 'gradle/quickstart/build/libs/*.war', fingerprint: true
+            archiveArtifacts artifacts: 'build/libs/*.war', fingerprint: true
         }
     }
 }
