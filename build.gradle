@@ -1,0 +1,21 @@
+plugins {
+  id "org.akhikhl.gretty" version "2.0.0"
+  id 'com.jonaslasauskas.capsule' version "0.3.0"
+}
+
+apply plugin: 'war'
+
+repositories {
+    mavenCentral()
+}
+
+capsule {
+  capsuleManifest {
+    applicationId = 'SeedStackCaplet'
+    applicationClass = 'org.seedstack.seed.core.SeedMain'
+  }
+}
+
+gretty {
+    httpPort = 8080
+}
