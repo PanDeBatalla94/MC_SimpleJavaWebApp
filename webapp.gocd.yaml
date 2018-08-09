@@ -1,6 +1,6 @@
 format_version: 3
 pipelines:
-  quickstart-cli:
+  sampleJavaWebApp:
     lock_behavior: lockOnFailure
     group: Project
     materials:
