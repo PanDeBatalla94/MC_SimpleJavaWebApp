@@ -5,8 +5,8 @@ pipelines:
     group: Project
     materials:
       repo: 
-       git: https://github.com/devops-at06/MC_SimpleJavaWebApp.git
-       branch: master 
+       git: https://github.com/PanDeBatalla94/MC_SimpleJavaWebApp.git
+       branch: checkstyle 
     stages: 
       - Build:
           jobs:
@@ -31,6 +31,7 @@ pipelines:
                       - clean
                       - test
                       - jacocoTestReport
+                      - check
               artifacts:
                 - build:
                     source: build/reports/tests/test/**/*
@@ -39,6 +40,18 @@ pipelines:
                 - build:
                     source: build/jacocoHtml/**/*
                     destination: jacoco
+                
+                - build:
+                    source: build/reports/checkstyle/*
+                    destination: checkstyle
+                
+                - test:
+                    source: build/reports/findbugs/*
+                    destination: findbugs
+
+                - build:
+                    source: build/reports/pmd/*
+                    destination: pmd
 
                 - test:
                     source: build/test-results/test/*.xml
@@ -47,6 +60,9 @@ pipelines:
               tabs:
                 unit_test: html/index.html
                 jacoco: jacoco/index.html
+                checkstyle: checkstyle/main.html
+                findbugs: findbugs/main.xml
+                pmd: pmd/main.html
       - Sonarqube:
           jobs:
             analyzing: 
