@@ -6,10 +6,33 @@ plugins {
 apply plugin: 'war'
 apply plugin: "jacoco"
 apply plugin: "org.sonarqube"
+apply plugin: 'pmd'
+apply plugin: 'findbugs'
+apply plugin: 'checkstyle'
+
 
 repositories {
     mavenCentral()
     jcenter()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+}
+
+findbugs{
+    ignoreFailures=true
+    findbugsTest.enabled=false
+    toolVersion = '3.0.1'
+}
+
+pmd {
+    ignoreFailures = true
+    ruleSets = [
+    "java-basic",
+    "java-braces"
+  ]
+    toolVersion = '6.0.0'
 }
 
 gretty {
@@ -37,7 +60,16 @@ uploadArchives {
     }
 }
 
-dependencies {
-    testCompile 'junit:junit:4.12'
+checkstyle {
+    ignoreFailures = true
+    toolVersion = '8.8'
+}
+
+tasks.withType(FindBugs) {
+   ignoreFailures = true
+   reports {
+       xml.enabled false
+       html.enabled true
+   }
 }
 
