@@ -45,7 +45,7 @@ pipelines:
                     source: build/reports/checkstyle/*
                     destination: checkstyle
                 
-                - test:
+                - build:
                     source: build/reports/findbugs/*
                     destination: findbugs
 
@@ -61,7 +61,7 @@ pipelines:
                 unit_test: html/index.html
                 jacoco: jacoco/index.html
                 checkstyle: checkstyle/main.html
-                findbugs: findbugs/main.xml
+                findbugs: findbugs/main.html
                 pmd: pmd/main.html
       - Sonarqube:
           jobs:

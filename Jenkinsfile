@@ -47,7 +47,7 @@ pipeline {
                          alwaysLinkToLastBuild: false,  
                          keepAll: true, 
                          reportDir: 'build/reports/findbugs', 
-                         reportFiles: 'main.xml', 
+                         reportFiles: 'main.html', 
                          reportTitles: "Bugs Report",
                          reportName: 'BugReport'])
 

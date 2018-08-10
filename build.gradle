@@ -65,3 +65,11 @@ checkstyle {
     toolVersion = '8.8'
 }
 
+tasks.withType(FindBugs) {
+   ignoreFailures = true
+   reports {
+       xml.enabled false
+       html.enabled true
+   }
+}
+
