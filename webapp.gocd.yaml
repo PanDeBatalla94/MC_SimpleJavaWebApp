@@ -16,11 +16,7 @@ pipelines:
                     command: ./gradlew
                     arguments:
                       - "clean"
-                      - "assemble"
-              artifacts:
-                - build:
-                    source: build/libs/*.war
-                    destination: Build
+
       - Test:
           jobs:
             Unit_Test: 
