@@ -35,14 +35,14 @@ public class CounterServlet extends HttpServlet {
 
         try (PrintWriter writer = response.getWriter()) {
 
-            writer.println("<!DOCTYPE html><html>");
+            writer.println(getDocType());
             writer.println("<head>");
             writer.println("<meta charset=\"UTF-8\" />");
             writer.println(getTitle());
             writer.println("</head>");
             writer.println("<body>");
-
-            writer.println("<h1>You are our " + counter + ". customer</h1>");
+            writer.println(getBody());
+            writer.println("<h1>" + counter + ". customer</h1>");
 
             writer.println("</body>");
             writer.println("</html>");
@@ -51,5 +51,12 @@ public class CounterServlet extends HttpServlet {
 
     public String getTitle() {
         return "<title>CounterServlet using doGet() to increment local variable</title>";
+    }
+
+    public String getBody() {
+        return "<h1>You are our: </h1>";
+    }
+    public String getDocType() {
+        return "<!DOCTYPE html><html>";
     }
 }

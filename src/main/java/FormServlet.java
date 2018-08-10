@@ -17,10 +17,10 @@ public class FormServlet extends HttpServlet {
 
         try (PrintWriter writer = response.getWriter()) {
 
-            writer.println("<!DOCTYPE html><html>");
+            writer.println(getDocType());
             writer.println("<head>");
             writer.println("<meta charset=\"UTF-8\" />");
-            writer.println("<title>FormServlet using doGet() to read form data</title>");
+            writer.println(getTitle());
             writer.println("</head>");
             writer.println("<body>");
 
@@ -29,6 +29,7 @@ public class FormServlet extends HttpServlet {
                     " " +
                     request.getParameter("last_name") +
                     "! Nice to meet you ;)</h1>");
+            writer.println("<h2>" + getYear() + "</h2>");
 
             writer.println("</body>");
             writer.println("</html>");
@@ -37,5 +38,15 @@ public class FormServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+    }
+
+    public String getTitle() {
+        return "<title>FormServlet using doGet() to read form data</title>";
+    }
+    public String getDocType() {
+        return "<!DOCTYPE html><html>";
+    }
+    public String getYear() {
+        return "2018";
     }
 }
