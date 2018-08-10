@@ -72,6 +72,19 @@ pipelines:
                     arguments:
                       - "sonarqube"
 
+      - Package:
+          jobs:
+            building: 
+              tasks:
+                - exec:
+                    command: ./gradlew
+                    arguments:
+                      - "war"
+              artifacts:
+                - build:
+                    source: build/libs/*.war
+                    destination: Build_war
+
 
  
  

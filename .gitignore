@@ -6,4 +6,5 @@
 .classpath
 /build/
 /out/
+/bin/
 *.iml
