@@ -24,17 +24,28 @@ public class CounterViewServlet extends HttpServlet {
 
         try (PrintWriter writer = response.getWriter()) {
 
-            writer.println("<!DOCTYPE html><html>");
+            writer.println(getDocType());
             writer.println("<head>");
             writer.println("<meta charset=\"UTF-8\" />");
-            writer.println("<title>CounterViewServlet using doGet() to view counter value</title>");
+            writer.println(getTitle());
             writer.println("</head>");
             writer.println("<body>");
 
-            writer.println("<h1>Total number of visitors is "+ counter +"</h1>");
+            writer.println(getVisitors());
+
+            writer.println("<h1>" + counter + "</h1>");
 
             writer.println("</body>");
             writer.println("</html>");
         }
+    }
+    public String getTitle() {
+        return "<title>CounterViewServlet using doGet() to view counter value</title>";
+    }
+    public String getVisitors() {
+        return "<h1>Total number of visitors is </h1>";
+    }
+    public String getDocType() {
+        return "<!DOCTYPE html><html>";
     }
 }

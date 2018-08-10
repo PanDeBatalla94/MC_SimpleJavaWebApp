@@ -9,6 +9,7 @@ apply plugin: "org.sonarqube"
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 gretty {
