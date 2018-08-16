@@ -89,6 +89,22 @@ pipelines:
                       - -Puser_home=/home/go
                       - -Pwar_path=Build_war
 
+
+      - Cucumber:
+          jobs:
+            report: 
+              tasks:
+                - exec:
+                    command: ./gradlew
+                    arguments:
+                      - allureReport
+              artifacts:
+                - build:
+                    source: build/reports/allure-report/**/*
+                    destination: cucumber                   
+              tabs:
+                Cucumber: cucumber/index.html
+
       - Clean:
           jobs:
             cleaning: 
