@@ -16,6 +16,11 @@ pipelines:
                     command: ./gradlew
                     arguments:
                       - "clean"
+                      - "war"
+              artifacts:
+                - build:
+                    source: build/libs/*.war
+                    destination: Build_war
 
       - Test:
           jobs:
@@ -67,20 +72,6 @@ pipelines:
                     command: ./gradlew
                     arguments:
                       - "sonarqube"
-
-      - Package:
-          jobs:
-            building: 
-              tasks:
-                - exec:
-                    command: ./gradlew
-                    arguments:
-                      - "war"
-              artifacts:
-                - build:
-                    source: build/libs/*.war
-                    destination: Build_war
-
       - Deploy:
           jobs:
             deploying: 
@@ -98,6 +89,16 @@ pipelines:
                       - -Pdev_server=10.28.135.235
                       - -Puser_home=/home/go
                       - -Pwar_path=war
+
+      - Clean:
+          jobs:
+            cleaning: 
+              tasks:
+                - exec:
+                    command: ./gradlew
+                    arguments:
+                      - "clean"
+              
 
 
 
