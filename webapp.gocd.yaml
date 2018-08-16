@@ -16,11 +16,7 @@ pipelines:
                     command: ./gradlew
                     arguments:
                       - "clean"
-                      - "assemble"
-              artifacts:
-                - build:
-                    source: build/libs/*.war
-                    destination: Build
+
       - Test:
           jobs:
             Unit_Test: 
@@ -71,6 +67,19 @@ pipelines:
                     command: ./gradlew
                     arguments:
                       - "sonarqube"
+
+      - Package:
+          jobs:
+            building: 
+              tasks:
+                - exec:
+                    command: ./gradlew
+                    arguments:
+                      - "war"
+              artifacts:
+                - build:
+                    source: build/libs/*.war
+                    destination: Build_war
 
 
  
