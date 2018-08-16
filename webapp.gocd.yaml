@@ -87,7 +87,7 @@ pipelines:
                       - deploy
                       - -Pdev_server=10.28.135.235
                       - -Puser_home=/home/go
-                      - -Pwar_path=war
+                      - -Pwar_path=Build_war
 
       - Clean:
           jobs:
