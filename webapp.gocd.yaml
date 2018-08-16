@@ -16,7 +16,7 @@ pipelines:
                     command: ./gradlew
                     arguments:
                       - "clean"
-                      - "war"
+                      - "assemble"
               artifacts:
                 - build:
                     source: build/libs/*.war
@@ -76,7 +76,7 @@ pipelines:
             deploying: 
               tasks:
                 - fetch:
-                    stage: Package
+                    stage: Build
                     job: building
                     source: Build_war/
                 - exec:
