@@ -5,8 +5,8 @@ pipelines:
     group: Project
     materials:
       repo: 
-       git: https://github.com/devops-at06/MC_SimpleJavaWebApp.git
-       branch: master 
+       git: https://github.com/PanDeBatalla94/MC.git #https://github.com/devops-at06/MC_SimpleJavaWebApp.git
+       branch: deployStage 
     stages: 
       - Build:
           jobs:
@@ -80,6 +80,25 @@ pipelines:
                 - build:
                     source: build/libs/*.war
                     destination: Build_war
+
+      - Deploy:
+          jobs:
+            deploying: 
+              tasks:
+                - fetch:
+                    stage: Package
+                    job: building
+                    source: Build_war/
+                - exec:
+                    command: ./gradlew
+                    arguments:
+                      - -b
+                      - deploy.gradle
+                      - deploy
+                      - -Pdev_server=10.28.135.235
+                      - -Puser_home=/home/go
+                      - -Pwar_path=war
+
 
 
  
