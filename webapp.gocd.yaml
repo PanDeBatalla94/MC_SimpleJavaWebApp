@@ -16,6 +16,11 @@ pipelines:
                     command: ./gradlew
                     arguments:
                       - "clean"
+                      - "assemble"
+              artifacts:
+                - build:
+                    source: build/libs/*.war
+                    destination: Build_war
 
       - Test:
           jobs:
@@ -24,7 +29,6 @@ pipelines:
                 - exec:
                     command: ./gradlew
                     arguments:
-                      - clean
                       - test
                       - jacocoTestReport
                       - check
@@ -67,19 +71,34 @@ pipelines:
                     command: ./gradlew
                     arguments:
                       - "sonarqube"
-
-      - Package:
+      - Deploy:
           jobs:
-            building: 
+            deploying: 
+              tasks:
+                - fetch:
+                    stage: Build
+                    job: building
+                    source: Build_war/
+                - exec:
+                    command: ./gradlew
+                    arguments:
+                      - -b
+                      - deploy.gradle
+                      - deploy
+                      - -Pdev_server=10.28.135.235
+                      - -Puser_home=/home/go
+                      - -Pwar_path=Build_war
+
+      - Clean:
+          jobs:
+            cleaning: 
               tasks:
                 - exec:
                     command: ./gradlew
                     arguments:
-                      - "war"
-              artifacts:
-                - build:
-                    source: build/libs/*.war
-                    destination: Build_war
+                      - "clean"
+              
+
 
 
  
