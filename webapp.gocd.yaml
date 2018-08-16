@@ -5,7 +5,7 @@ pipelines:
     group: Project
     materials:
       repo: 
-       git: https://github.com/PanDeBatalla94/MC.git #https://github.com/devops-at06/MC_SimpleJavaWebApp.git
+       git: https://github.com/devops-at06/MC_SimpleJavaWebApp.git #https://github.com/devops-at06/MC_SimpleJavaWebApp.git
        branch: deployStage 
     stages: 
       - Build:
