@@ -90,29 +90,27 @@ pipelines:
                       - -Pwar_path=Build_war
 
 
-      - Cucumber:
+      - Aceptance:
           jobs:
-            report: 
+            reports: 
               tasks:
                 - exec:
-                    command: ./gradlew
+                    command: ./acceptance/gradlew
                     arguments:
-                      - allureReport
+                      - clean
+                      - test
               artifacts:
                 - build:
-                    source: build/reports/allure-report/**/*
-                    destination: cucumber                   
+                    source: acceptance/build/reports/cucumber-html-reports/**/*
+                    destination: cucumberhtml  
+                    - build:
+                    source: acceptance/build/reports/cucumber/**/*
+                    destination: cucumber                 
               tabs:
+                CucumberComplete: cucumberhtml/report-feature_gradle-cucumber-features-gradle-feature.html
                 Cucumber: cucumber/index.html
 
-      - Clean:
-          jobs:
-            cleaning: 
-              tasks:
-                - exec:
-                    command: ./gradlew
-                    arguments:
-                      - "clean"
+
               
 
 
