@@ -90,6 +90,11 @@ pipelines:
                       - -Pwar_path=Build_war
 
 
+
+
+
+
+
       - Aceptance:
           jobs:
             reports: 
@@ -99,6 +104,8 @@ pipelines:
                     arguments:
                       - clean
                       - test
+                      - -p
+                      - acceptance/
               artifacts:
                 - build:
                     source: acceptance/build/reports/cucumber-html-reports/**/*
