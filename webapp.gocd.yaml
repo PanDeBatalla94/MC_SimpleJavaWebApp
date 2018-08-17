@@ -103,7 +103,7 @@ pipelines:
                 - build:
                     source: acceptance/build/reports/cucumber-html-reports/**/*
                     destination: cucumberhtml  
-                    - build:
+                - build:
                     source: acceptance/build/reports/cucumber/**/*
                     destination: cucumber                 
               tabs:
