@@ -5,8 +5,8 @@ pipelines:
     group: Project
     materials:
       repo: 
-       git: https://github.com/PanDeBatalla94/MC_SimpleJavaWebApp.git #https://github.com/devops-at06/MC_SimpleJavaWebApp.git
-       branch: cucumber 
+       git: https://github.com/devops-at06/MC_SimpleJavaWebApp.git
+       branch: master 
     stages: 
       - Build:
           jobs:
