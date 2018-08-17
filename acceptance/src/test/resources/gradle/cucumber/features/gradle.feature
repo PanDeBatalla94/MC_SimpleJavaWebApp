@@ -17,5 +17,4 @@ Feature: Gradle-Cucumber integration
     Given A failing scenario
     When I press start the page display an error message
     Then I go to error page
-    
-    
+ 
