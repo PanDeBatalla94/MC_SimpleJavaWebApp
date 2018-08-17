@@ -77,6 +77,47 @@ pipeline {
                 }
             }
         }
+
+        stage('Deploy') {  
+
+            steps {               
+                echo 'Deploying ...'
+                sh './gradlew -b deploy.gradle deploy -Pdev_server=10.28.135.235 -Puser_home=/home -Pwar_path=build/libs'
+        
+            }
+                   
+        }
+
+        stage('Acceptance') {  
+
+            steps {               
+                echo 'Reports ...'
+                sh './acceptance/gradlew clean test -p acceptance'
+            }
+            post {
+                success {
+                    publishHTML(target: [allowMissing: true, 
+                                alwaysLinkToLastBuild: false,  
+                                keepAll: true, 
+                                reportDir: 'acceptance/build/reports/cucumber-html-reports', 
+                                reportFiles: 'report-feature_gradle-cucumber-features-gradle-feature.html', 
+                                reportTitles: "Cucumber complete Report",
+                                reportName: 'Cucumber complete Report'])
+
+                    publishHTML(target: [allowMissing: true, 
+                                alwaysLinkToLastBuild: false,  
+                                keepAll: true, 
+                                reportDir: 'acceptance/build/reports/cucumber', 
+                                reportFiles: 'index.html', 
+                                reportTitles: "Cucumber Report",
+                                reportName: 'Cucumber Report'])
+
+                    
+                }
+                
+            }
+                   
+        }
     }
     
 }
