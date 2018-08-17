@@ -89,14 +89,35 @@ pipelines:
                       - -Puser_home=/home/go
                       - -Pwar_path=Build_war
 
-      - Clean:
+
+
+
+
+
+
+      - Aceptance:
           jobs:
-            cleaning: 
+            reports: 
               tasks:
                 - exec:
-                    command: ./gradlew
+                    command: ./acceptance/gradlew
                     arguments:
-                      - "clean"
+                      - clean
+                      - test
+                      - -p
+                      - acceptance/
+              artifacts:
+                - build:
+                    source: acceptance/build/reports/cucumber-html-reports/**/*
+                    destination: cucumberhtml  
+                - build:
+                    source: acceptance/build/reports/cucumber/**/*
+                    destination: cucumber                 
+              tabs:
+                CucumberComp: cucumberhtml/report-feature_gradle-cucumber-features-gradle-feature.html
+                Cucumber: cucumber/index.html
+
+
               
 
 
