@@ -107,7 +107,7 @@ pipelines:
                     source: acceptance/build/reports/cucumber/**/*
                     destination: cucumber                 
               tabs:
-                CucumberComplete: cucumberhtml/report-feature_gradle-cucumber-features-gradle-feature.html
+                CucumberComp: cucumberhtml/report-feature_gradle-cucumber-features-gradle-feature.html
                 Cucumber: cucumber/index.html
 
 
