@@ -63,7 +63,7 @@ pipelines:
                 checkstyle: checkstyle/main.html
                 findbugs: findbugs/main.html
                 pmd: pmd/main.html
-      - Sonarqube:
+      - CodeQuality:
           jobs:
             analyzing: 
               tasks:
@@ -88,11 +88,6 @@ pipelines:
                       - -Pdev_server=10.28.135.235
                       - -Puser_home=/home/go
                       - -Pwar_path=Build_war
-
-
-
-
-
 
 
       - Aceptance:

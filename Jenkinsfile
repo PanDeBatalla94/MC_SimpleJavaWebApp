@@ -4,7 +4,12 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-	            sh './gradlew clean'
+	            sh './gradlew clean assemble'
+            }
+            post {
+                success {
+                    archiveArtifacts artifacts: 'build/libs/*.war', fingerprint: true
+                }
             }
         }
         stage('Test') {
@@ -66,18 +71,6 @@ pipeline {
             }
         }
 
-        stage('Package...') {
-            steps {
-              echo 'Archive artifact...' 
-              sh './gradlew war'           
-            }
-            post {
-                success {
-                    archiveArtifacts artifacts: 'build/libs/*.war', fingerprint: true
-                }
-            }
-        }
-
         stage('Deploy') {  
 
             steps {               
@@ -104,15 +97,7 @@ pipeline {
                                 reportTitles: "Cucumber complete Report",
                                 reportName: 'Cucumber complete Report'])
 
-                    publishHTML(target: [allowMissing: true, 
-                                alwaysLinkToLastBuild: false,  
-                                keepAll: true, 
-                                reportDir: 'acceptance/build/reports/cucumber', 
-                                reportFiles: 'index.html', 
-                                reportTitles: "Cucumber Report",
-                                reportName: 'Cucumber Report'])
-
-                    
+                                        
                 }
                 
             }
