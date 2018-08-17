@@ -18,3 +18,4 @@ Feature: Gradle-Cucumber integration
     When I press start the page display an error message
     Then I go to error page
     
+    
